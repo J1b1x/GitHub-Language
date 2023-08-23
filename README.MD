@@ -3,8 +3,10 @@
 ![php](https://img.shields.io/badge/php-8.1-informational)
 ![api](https://img.shields.io/badge/pocketmine-5.0-informational)
 
-GitHub-Language is a PocketMine-MP library to translate your whole server to different languages.
+GitHub-Language is a very advanced github based language library.
+You can use it, if you have an international server and want to translate messages, popups, uis etc. to the player's personal language.
 All the language files can be stored on a GitHub repository, which makes it a lot easier to edit and contribute languages.
+It also includes auto translations for ui's and command descriptions.
 
 ## Categories
 + [Registration](#registration)
