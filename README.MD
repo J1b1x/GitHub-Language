@@ -133,7 +133,7 @@ tr_TR
 #### Now where you've put the locale of your language in the `locales.txt` file, you can create your actual language file.
 #### You basically only need to define a few default values, everything else is optional.
 #### This is how your file should look like (this example is a file of the language "English")
-```json
+```json5
 {
   "name": "English", //the name of the language
   "prefix": "§bMyServer §8>§7 ", //#optional | the prefix of the language (recommend to use the server prefix)
