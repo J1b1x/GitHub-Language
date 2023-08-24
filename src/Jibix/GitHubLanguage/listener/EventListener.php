@@ -1,6 +1,6 @@
 <?php
-namespace GitHubLanguage\listener;
-use GitHubLanguage\language\LanguageManager;
+namespace Jibix\GitHubLanguage\listener;
+use Jibix\GitHubLanguage\language\LanguageManager;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketSendEvent;
 use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
@@ -11,7 +11,7 @@ use pocketmine\Server;
 
 /**
  * Class EventListener
- * @package GitHubLanguage\listener
+ * @package Jibix\GitHubLanguage\listener
  * @author Jibix
  * @date 22.08.2023 - 23:42
  * @project GitHub-Language

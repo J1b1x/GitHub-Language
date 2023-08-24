@@ -1,18 +1,20 @@
 <?php
-namespace GitHubLanguage\language;
+namespace Jibix\GitHubLanguage\language;
 use Closure;
-use GitHubLanguage\listener\EventListener;
-use GitHubLanguage\task\LanguageReloadAsyncTask;
+use Jibix\GitHubLanguage\github\RepositoryType;
+use Jibix\GitHubLanguage\listener\EventListener;
+use Jibix\GitHubLanguage\task\LanguageReloadAsyncTask;
 use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
 use pocketmine\utils\Utils;
+use function GitHubLanguage\language\mb_strtolower;
 
 
 /**
  * Class LanguageManager
- * @package GitHubLanguage\language
+ * @package Jibix\GitHubLanguage\language
  * @author Jibix
  * @date 22.08.2023 - 23:43
  * @project GitHub-Language
@@ -30,7 +32,7 @@ final class LanguageManager{
 
     public function __construct(
         Plugin $plugin,
-        private string $repositoryUrl,
+        private RepositoryType $repository,
         private ?Closure $getPlayerLanguage = null,
         //Considering adding a fallback language?
     ){
@@ -42,7 +44,7 @@ final class LanguageManager{
     }
 
     public function reloadLanguages(): void{
-        Server::getInstance()->getAsyncPool()->submitTask(new LanguageReloadAsyncTask($this->repositoryUrl));
+        Server::getInstance()->getAsyncPool()->submitTask(new LanguageReloadAsyncTask($this->repository->getUrl(), $this->repository->getToken()));
     }
 
     public function getLanguages(): array{

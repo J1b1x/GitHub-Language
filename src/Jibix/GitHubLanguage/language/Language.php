@@ -1,13 +1,13 @@
 <?php
-namespace GitHubLanguage\language;
-use GitHubLanguage\language\exception\MissingLanguageValueException;
+namespace Jibix\GitHubLanguage\language;
+use Jibix\GitHubLanguage\language\exception\MissingLanguageValueException;
 use JsonSerializable;
 use pocketmine\player\Player;
 
 
 /**
  * Class Language
- * @package GitHubLanguage\language
+ * @package Jibix\GitHubLanguage\language
  * @author Jibix
  * @date 22.08.2023 - 23:44
  * @project GitHub-Language
@@ -84,7 +84,7 @@ class Language implements JsonSerializable{
      * Function fromData
      * @param array $data
      * @return static
-     * @throws MissingLanguageValueException
+     * @throws \Jibix\GitHubLanguage\language\exception\MissingLanguageValueException
      */
     public static function fromData(array $data): static{
         foreach (["locale", "name", "shortcut"] as $required) {

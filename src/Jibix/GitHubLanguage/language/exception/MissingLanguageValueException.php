@@ -1,10 +1,10 @@
 <?php
-namespace GitHubLanguage\language\exception;
+namespace Jibix\GitHubLanguage\language\exception;
 
 
 /**
  * Class MissingLanguageValueException
- * @package GitHubLanguage\language\exception
+ * @package Jibix\GitHubLanguage\language\exception
  * @author Jibix
  * @date 23.08.2023 - 00:10
  * @project GitHub-Language

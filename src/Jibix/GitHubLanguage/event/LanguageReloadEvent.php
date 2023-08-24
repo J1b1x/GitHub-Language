@@ -1,6 +1,6 @@
 <?php
-namespace GitHubLanguage\event;
-use GitHubLanguage\language\Language;
+namespace Jibix\GitHubLanguage\event;
+use Jibix\GitHubLanguage\language\Language;
 use pocketmine\event\Cancellable;
 use pocketmine\event\CancellableTrait;
 use pocketmine\event\Event;
@@ -8,7 +8,7 @@ use pocketmine\event\Event;
 
 /**
  * Class LanguageReloadEvent
- * @package GitHubLanguage\event
+ * @package Jibix\GitHubLanguage\event
  * @author Jibix
  * @date 22.08.2023 - 23:49
  * @project GitHub-Language
@@ -18,7 +18,7 @@ class LanguageReloadEvent extends Event implements Cancellable{
 
     /**
      * LanguageReloadEvent constructor.
-     * @param Language[] $languages
+     * @param \Jibix\GitHubLanguage\language\Language[] $languages
      */
     public function __construct(private array $languages){}
 

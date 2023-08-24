@@ -27,16 +27,16 @@ It also includes auto translations for ui's and command descriptions.
 
 ## Registration
 ### Explanation
-- `$repositoryUrl` is basically the url to the raw data of your language repository
+- `$this` is the instance of your plugin base
+- `$repositoryType` is basically the type of your language repository, which contains the url and an access token if the repository is private
 - `$getPlayerLanguage` is a closure function that returns the player's language. This is used to automatically translate command descriptions and ui contents to the player's language. You can use null if you don't want to use this feature
 ### Example 
 ```php
-private const REPOSITORY_URL = "https://raw.githubusercontent.com/YourOrganization/language/main/";
 
 protected function onEnable(): void{
     new LanguageManager(
         $this,
-        self::REPOSITORY_URL,
+        RepositoryType::PUBLIC("YourOrganization/language/main/") //RepositoryType::PUBLIC("YourOrganization/language/main/", "ACCESS_TOKEN)
         fn (Player $player): Language => Session::get($player)->getLanguage()
     );
 }

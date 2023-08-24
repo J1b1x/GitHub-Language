@@ -1,32 +1,34 @@
 <?php
-namespace GitHubLanguage\task;
-use GitHubLanguage\event\LanguageReloadEvent;
-use GitHubLanguage\language\exception\LanguageException;
-use GitHubLanguage\language\exception\MissingLanguageValueException;
-use GitHubLanguage\language\Language;
-use GitHubLanguage\language\LanguageManager;
+namespace Jibix\GitHubLanguage\task;
 use GlobalLogger;
+use Jibix\GitHubLanguage\event\LanguageReloadEvent;
+use Jibix\GitHubLanguage\language\exception\LanguageException;
+use Jibix\GitHubLanguage\language\exception\MissingLanguageValueException;
+use Jibix\GitHubLanguage\language\Language;
+use Jibix\GitHubLanguage\language\LanguageManager;
 use pocketmine\scheduler\AsyncTask;
 use pocketmine\utils\Internet;
 
 
 /**
  * Class LanguageReloadAsyncTask
- * @package GitHubLanguage\task
+ * @package Jibix\GitHubLanguage\task
  * @author Jibix
  * @date 22.08.2023 - 23:45
  * @project GitHub-Language
  */
 class LanguageReloadAsyncTask extends AsyncTask{
 
-    public function __construct(private string $url){}
+
+    public function __construct(private string $url, private ?string $token = null){}
 
     public function onRun(): void{
+        $headers = $this->token === null ? [] : ["Authorization: token " . $this->token];
         $languages = [];
-        if (($body = Internet::getURL($this->url . "locales.txt")?->getBody()) === "404: Not Found") throw new LanguageException("locales.txt file could not be found");
+        if (($body = Internet::getURL($this->url . "locales.txt", 10, $headers)?->getBody()) === "404: Not Found") throw new LanguageException("locales.txt file could not be found");
         foreach (explode("\n", $body) as $locale) {
             if (empty($locale)) continue;
-            $data = Internet::getURL($this->url . $locale . ".json")?->getBody();
+            $data = Internet::getURL($this->url . $locale . ".json", 10, $headers)?->getBody();
             if ($data === null || $data === "404: Not Found") {
                 GlobalLogger::get()->warning(LanguageManager::PREFIX . "Language file '$locale.json' could not be found");
                 return;

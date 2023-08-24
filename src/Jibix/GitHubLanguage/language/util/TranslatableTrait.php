@@ -1,12 +1,12 @@
 <?php
-namespace GitHubLanguage\language\util;
+namespace Jibix\GitHubLanguage\language\util;
 use Exception;
-use GitHubLanguage\language\Language;
+use Jibix\GitHubLanguage\language\Language;
 
 
 /**
  * Trait TranslatableTrait
- * @package GitHubLanguage\language\util
+ * @package Jibix\GitHubLanguage\language\util
  * @author Jibix
  * @date 22.08.2023 - 23:50
  * @project GitHub-Language
