@@ -23,7 +23,7 @@ class EventListener implements Listener{
         if ($closure === null) return;
         foreach ($event->getPackets() as $packet) {
             foreach ($event->getTargets() as $target) {
-                if (($player = $target->getPlayer()) === null) continue;
+                if (($player = $target->getPlayer()) === null || !$player->spawned) continue;
                 $language = ($closure)($player);
                 if ($packet instanceof ModalFormRequestPacket || $packet instanceof ServerSettingsResponsePacket) {
                     $packet->formData = preg_replace_callback(
@@ -31,7 +31,7 @@ class EventListener implements Listener{
                         fn ($match): string => $language->translate($match[1]),
                         $packet->formData
                     );
-                } elseif ($packet instanceof AvailableCommandsPacket && $player->spawned) {
+                } elseif ($packet instanceof AvailableCommandsPacket) {
                     foreach ($packet->commandData as $name => $data) {
                         $command = Server::getInstance()->getCommandMap()->getCommand($name);
                         if ($command !== null) $packet->commandData[$name]->description = $language->translate($command->getDescription());
