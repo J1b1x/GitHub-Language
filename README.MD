@@ -34,7 +34,7 @@ It also includes auto translations for ui's and command descriptions.
 ```php
 
 protected function onEnable(): void{
-    new LanguageManager(
+    LanguageManager::initialize(
         $this,
         RepositoryType::PUBLIC("YourOrganization/language/main/") //RepositoryType::PUBLIC("YourOrganization/language/main/", "ACCESS_TOKEN")
         fn (Player $player): Language => Session::get($player)->getLanguage()

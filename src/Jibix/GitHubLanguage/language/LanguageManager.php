@@ -9,7 +9,6 @@ use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
 use pocketmine\utils\Utils;
-use function GitHubLanguage\language\mb_strtolower;
 
 
 /**
@@ -30,7 +29,7 @@ final class LanguageManager{
     /** @var Language[] */
     private array $languages = [];
 
-    public function __construct(
+    private function __construct(
         Plugin $plugin,
         private RepositoryType $repository,
         private ?Closure $getPlayerLanguage = null,
@@ -41,6 +40,10 @@ final class LanguageManager{
         self::setInstance($this);
         Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $plugin);
         $this->reloadLanguages();
+    }
+
+    public static function initialize(Plugin $plugin, RepositoryType $repository, ?Closure $getPlayerLanguage = null): void{
+        new self($plugin, $repository, $getPlayerLanguage);
     }
 
     public function reloadLanguages(): void{
