@@ -11,18 +11,25 @@ namespace Jibix\GitHubLanguage\github;
  */
 final class RepositoryType{
 
-    private const REPOSITORY_URL = "https://raw.githubusercontent.com/";
-
     public static function PRIVATE(string $repository, string $token): self{
-        return new self(self::REPOSITORY_URL . $repository, $token);
+        return new self($repository, $token);
     }
 
     public static function PUBLIC(string $repository): self{
-        return new self(self::REPOSITORY_URL . $repository);
+        return new self($repository);
+    }
+
+    public static function DETECT(string $repository, ?string $token = null): self{
+        return empty($token) ? self::PUBLIC($repository) : self::PRIVATE($repository, $token);
     }
 
 
-    public function __construct(private string $url, private ?string $token = null){
+    private const REPOSITORY_URL = "https://raw.githubusercontent.com/";
+
+    private string $url;
+
+    private function __construct(string $repository, private ?string $token = null){
+        $this->url = self::REPOSITORY_URL . $repository;
     }
 
     public function getUrl(): string{

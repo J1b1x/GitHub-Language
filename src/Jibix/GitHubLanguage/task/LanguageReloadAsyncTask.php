@@ -19,17 +19,18 @@ use pocketmine\utils\Internet;
  */
 class LanguageReloadAsyncTask extends AsyncTask{
 
+    private const NOT_FOUND_ERROR = "404: Not Found";
 
     public function __construct(private string $url, private ?string $token = null){}
 
     public function onRun(): void{
         $headers = $this->token === null ? [] : ["Authorization: token " . $this->token];
         $languages = [];
-        if (($body = Internet::getURL($this->url . "locales.txt", 10, $headers)?->getBody()) === "404: Not Found") throw new LanguageException("locales.txt file could not be found");
+        if (($body = Internet::getURL($this->url . "locales.txt", 10, $headers)?->getBody()) === self::NOT_FOUND_ERROR) throw new LanguageException("locales.txt file could not be found");
         foreach (explode("\n", $body) as $locale) {
             if (empty($locale)) continue;
             $data = Internet::getURL($this->url . $locale . ".json", 10, $headers)?->getBody();
-            if ($data === null || $data === "404: Not Found") {
+            if ($data === null || $data === self::NOT_FOUND_ERROR) {
                 GlobalLogger::get()->warning(LanguageManager::PREFIX . "Language file '$locale.json' could not be found");
                 return;
             }
