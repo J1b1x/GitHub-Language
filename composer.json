@@ -1,0 +1,17 @@
+{
+  "name": "j1b1x/github-language",
+  "autoload": {
+    "psr-4": {
+      "Jibix\\GitHubLanguage\\": "src/Jibix/GitHubLanguage"
+    }
+  },
+  "authors": [
+    {
+      "name": "Jibix",
+      "homepage": "https://github.com/J1b1x"
+    }
+  ],
+  "require-dev": {
+    "pocketmine/pocketmine-mp": "^5.0"
+  }
+}

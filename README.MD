@@ -36,7 +36,7 @@ It also includes auto translations for ui's and command descriptions.
 protected function onEnable(): void{
     new LanguageManager(
         $this,
-        RepositoryType::PUBLIC("YourOrganization/language/main/") //RepositoryType::PUBLIC("YourOrganization/language/main/", "ACCESS_TOKEN)
+        RepositoryType::PUBLIC("YourOrganization/language/main/") //RepositoryType::PUBLIC("YourOrganization/language/main/", "ACCESS_TOKEN")
         fn (Player $player): Language => Session::get($player)->getLanguage()
     );
 }
