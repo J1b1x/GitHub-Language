@@ -3,6 +3,7 @@ namespace Jibix\GitHubLanguage\listener;
 use Jibix\GitHubLanguage\language\LanguageManager;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketSendEvent;
+use pocketmine\lang\Translatable;
 use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
 use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
 use pocketmine\network\mcpe\protocol\ServerSettingsResponsePacket;
@@ -34,7 +35,10 @@ class EventListener implements Listener{
                 } elseif ($packet instanceof AvailableCommandsPacket) {
                     foreach ($packet->commandData as $name => $data) {
                         $command = Server::getInstance()->getCommandMap()->getCommand($name);
-                        if ($command !== null) $packet->commandData[$name]->description = $language->translate($command->getDescription());
+                        if ($command !== null) {
+                            $description = $command->getDescription();
+                            $packet->commandData[$name]->description = $language->translate($description instanceof Translatable ? $description->getText() : $description);
+                        }
                     }
                 }
             }
