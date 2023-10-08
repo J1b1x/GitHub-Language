@@ -63,7 +63,7 @@ class Language implements JsonSerializable{
             preg_match_all("/{(\d+)}/", $value, $matches, PREG_OFFSET_CAPTURE);
             foreach ($matches[1] as $match) {
                 $i = intval($match[0]);
-                $value = str_replace("{" . $i . "}", strval($values[$i] ?? "") ?? "\${$i}", $value);
+                $value = str_replace("{" . $i . "}", strval($params[$i] ?? "") ?? "\${$i}", $value);
             }
         }
         return str_replace("{PREFIX}", $this->prefix, $value);
