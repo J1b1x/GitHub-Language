@@ -17,7 +17,7 @@ class Language implements JsonSerializable{
     public function __construct(
         protected string $locale,
         protected string $name,
-        protected string $shortcut = "en",
+        protected string $shortcut,
         protected ?string $prefix = null,
         protected array $contributors = [],
         protected array $values = []

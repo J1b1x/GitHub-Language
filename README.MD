@@ -6,7 +6,7 @@
 GitHub-Language is a very advanced github based language library.
 You can use it, if you have an international server and want to translate messages, popups, uis etc. to the player's personal language.
 All the language files can be stored on a GitHub repository (it also supports private repositories), which makes it a lot easier to edit and contribute languages.
-It also includes auto translations for ui's and command descriptions.
+It also includes auto translations for ui's and command descriptions and a free Google Translate API.
 
 ## Categories
 + [Registration](#registration)
@@ -24,7 +24,7 @@ It also includes auto translations for ui's and command descriptions.
 + [Language Repository](#language-repository)
   + [Required file (locales.txt)](#required-file)
   + [Language file example](#this-is-how-your-file-should-look-like-this-example-is-a-file-of-the-language-english)
-
++ [Google Translate API](#google-translate-api)
 ## Registration
 ### Explanation
 - `$this` is the instance of your plugin base
@@ -166,4 +166,18 @@ This is how your file should look like (this example is a file of the language "
     ]
   }
 }
+```
+
+### Google Translate API
+Here's an example of how to async translate a text using the Google Translate API:
+```php
+$languageFrom = LanguageManager::getInstance()->getLanguage("en_US");
+$languageTo = LanguageManager::getInstance()->getLanguage("de_DE");
+GoogleUtils::translate($languageFrom, $languageTo, "Hello world", function (string $result): void{
+    var_dump($result); //Output: "Hallo welt"
+});
+```
+You can also translate synchronously (not really recommended) by just doing this:
+```php
+$translation = GoogleUtils::translateRequest($languageFrom, $languageTo, $text);
 ```

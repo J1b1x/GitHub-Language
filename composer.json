@@ -13,5 +13,8 @@
   ],
   "require-dev": {
     "pocketmine/pocketmine-mp": "^5.0"
+  },
+  "require": {
+    "ext-curl": "*"
   }
 }
