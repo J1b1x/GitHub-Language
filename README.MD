@@ -173,7 +173,7 @@ Here's an example of how to async translate a text using the Google Translate AP
 ```php
 $languageFrom = LanguageManager::getInstance()->getLanguage("en_US");
 $languageTo = LanguageManager::getInstance()->getLanguage("de_DE");
-GoogleUtils::translate($languageFrom, $languageTo, "Hello world", function (string $result): void{
+GoogleUtils::translate($languageFrom, $languageTo, "Hello world", static function (string $result): void{
     var_dump($result); //Output: "Hallo welt"
 });
 ```
