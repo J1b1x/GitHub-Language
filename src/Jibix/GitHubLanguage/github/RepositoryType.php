@@ -28,8 +28,8 @@ final class RepositoryType{
 
     private string $url;
 
-    private function __construct(string $repository, private ?string $token = null){
-        $this->url = self::REPOSITORY_URL . $repository;
+    private function __construct(string $repository, private ?string $branch = "main", private ?string $token = null){
+        $this->url = self::REPOSITORY_URL . $repository . "/refs/heads/".$branch."/";
     }
 
     public function getUrl(): string{
